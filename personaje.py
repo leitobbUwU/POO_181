@@ -21,4 +21,4 @@ class Personaje:
     def recargarArma(self, municiones):
         cargador= 5
         cargador= cargador + municiones
-        print("Quedan "+ cargador + " balas")
+        print("Quedan "+ str(cargador) + " balas")

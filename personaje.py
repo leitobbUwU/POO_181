@@ -1,9 +1,17 @@
 class Personaje:
     
+    #Creamos al constructor
+    def __init__(self, esp, nom, alt):
+        self.especie= esp
+        self.nombre= nom
+        self.altura= alt
+    
+    """
     #atributos del personaje
     especie= "Humano"
     nombre= "Jhon 117"
     altura= 2.18
+    """
     
     #Metodos Personaje
     

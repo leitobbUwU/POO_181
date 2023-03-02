@@ -1,5 +1,21 @@
 
-from tkinter import Tk, Frame, Button
+from tkinter import Tk, Frame, Button, messagebox
+
+#4. Crear función para mandar a mostrar mensaje desde botón azul
+def mostrarMensaje():
+    messagebox.showinfo("Warning","Que onda pa")
+    messagebox.showerror("Error", "Todo fallo con exito")
+    print(messagebox.askokcancel("Pregunta seria", "¿El o ella jugo con tu corazón?"))
+    print(messagebox.askquestion("Pregunta","¿Esto es una pregunta?"))
+    print(messagebox.askretrycancel("Pregunta","¿Esto es una pregunta?"))
+    print(messagebox.askyesno("Pregunta","¿Esto es una pregunta?"))
+    print(messagebox.askyesnocancel("Pregunta","¿Esto es una pregunta?"))
+    
+#5. Funcion para agregar botones
+def agregarBoton():
+    botonVerde.config(text="+", bg="black", fg="white")
+    botonNuevo= Button(seccion3, text="Boton nuevo", font=("Helvetica", 20))
+    botonNuevo.pack()
 
 #1.Instanciamos un objeto ventana
 ventana= Tk()
@@ -15,18 +31,18 @@ seccion3=Frame(ventana, bg='#00ff00')
 seccion3.pack(expand=True, fill='both')
 
 #3. Botones
-botonAzul= Button(seccion1, text="Botoan Azul", fg="red", bg="#00ccff")
+botonAzul= Button(seccion1, text="Boton Azul", fg="red", bg="#00ccff", font=("Helvetica", 20),command=mostrarMensaje)
 botonAzul.place(x=60, y=60)
 
-botonAmarillo= Button(seccion2, text="Boton Amarillo", fg="yellow", bg="black")
+botonAmarillo= Button(seccion2, text="Boton Amarillo", fg="yellow", bg="black", font=("Helvetica", 20))
 botonAmarillo.grid(row=0, column=0)
 #botonAmarillo.place(x=60, y=60)
 
-botonNegro= Button(seccion2, text="Boton Negro", fg="black", bg="white")
+botonNegro= Button(seccion2, text="Boton Negro", fg="black", bg="white", font=("Helvetica", 20))
 botonNegro.grid(row=1, column=1)
 # botonNegro.place(x=60, y=60)
 
-botonVerde= Button(seccion3, text="Boton Verde", fg="green", bg="white")
+botonVerde= Button(seccion3, text="Boton Verde", fg="green", bg="white", command= agregarBoton, font=("Helvetica", 20))
 botonVerde.pack()
 # botonNegro.place(x=60, y=60)
 

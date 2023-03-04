@@ -1,22 +1,41 @@
-from tkinter import Tk, Button, messagebox, Entry, Label, Text
-from tkinter import scrolledtext as st
+import tkinter as tk
+from Logica12 import Login
+from tkinter import messagebox
 
+class Interfaz:
+    def __init__(self, ventana):
 #1.Instanciamos un objeto ventana
-ventana= Tk()
-ventana.title("Practica 11:3 Frames")
-ventana.geometry("800x600")
+        self.ventana=ventana
+        self.ventana.title("Practica 11.3 Frames")
+        self.ventana.geometry("800x600")
 
-titulo1 = Label(ventana, text="Usuario:")
-titulo1.pack()
-usuario = Entry(ventana)
-usuario.pack()
+        titulo1 = tk.Label(ventana, text="Usuario:", font=("Helvetica",30))
+        titulo1.pack(fill=tk.X, padx=20,pady=5)
+        self.usuario = tk.Entry(ventana)
+        self.usuario.pack(fill=tk.X, padx=20,pady=10)
 
-titulo2 = Label(ventana, text="Contraseña:")
-titulo2.pack()
-contraseña = Entry(ventana, show="*")
-contraseña.pack()
+        titulo2 = tk.Label(ventana, text="Contraseña:", font=("Helvetica", 30))
+        titulo2.pack(fill=tk.X, padx=20, pady=5)
+        self.contraseña = tk.Entry(ventana, show="*")
+        self.contraseña.pack(fill=tk.X, padx=20, pady=10)
 
-botonLog= Button(ventana, text="Boton Azul", fg="red", bg="#00ccff", font=("Helvetica", 15))
-botonLog.pack()
+        self.botonLog= tk.Button(ventana, text="Boton Azul", fg="red", bg="#00ccff", font=("Helvetica", 15), command=self.verificar)
+        self.botonLog.pack()
+        
+    def verificar(self):
+        Usuario = self.usuario.get()
+        Password = self.contraseña.get()
+        login = Login(Usuario, Password)
+        if login.login():
+            mensaje = "Bienvenido, " + Usuario + "!"
+        else:
+            mensaje = "Revise sus datos e intente de nuevo."
 
+        # Mostrar un mensaje de bienvenida o error
+        messagebox.showinfo("Resultado", mensaje)
+            
+        
+
+ventana= tk.Tk()
+interfaz_login=Interfaz(ventana)
 ventana.mainloop()

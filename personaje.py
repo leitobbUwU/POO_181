@@ -5,14 +5,7 @@ class Personaje:
         self.__especie= esp
         self.__nombre= nom
         self.__altura= alt
-    
-    """
-    #atributos del personaje
-    especie= "Humano"
-    nombre= "Jhon 117"
-    altura= 2.18
-    """
-    
+
     #Metodos Personaje
     
     def correr(self, status):
@@ -20,12 +13,10 @@ class Personaje:
             print("El personaje "+ self.__nombre + " esta corriendo")
         else:
             print("El personaje "+ self.__nombre + " se detuvo")
-            
-            
+                  
     def lanzarGranada(self):
         print("Se lanzo Granada ")
-        
-        
+          
     def recargarArma(self, municiones):
         cargador= 5
         cargador= cargador + municiones

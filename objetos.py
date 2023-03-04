@@ -26,13 +26,11 @@ Heroe.setnombre("Jhon 117")
 
 #4. Acceder a sus atributos y  etodos del cada OBJ
 
-
 print("")
 print("## Atributos y Metodos del Heroe: ##")
 print("El personaje pertenece a la raza: " + Heroe.getespecie())
 print("El personaje se llama: " + Heroe.getnombre())
 print("El personaje mide: " + str(Heroe.getaltura()) + " metros")
-
 
 Heroe.correr(True)
 Heroe.lanzarGranada()

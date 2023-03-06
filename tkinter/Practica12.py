@@ -11,13 +11,13 @@ class Interfaz:
 
         titulo1 = tk.Label(ventana, text="Usuario:", font=("Helvetica",30))
         titulo1.pack(fill=tk.X, padx=20,pady=5)
-        self.usuario = tk.Entry(ventana)
+        self.usuario = tk.Entry(ventana, font=("Helvetica", 30))
         self.usuario.pack(fill=tk.X, padx=20,pady=10)
 
         titulo2 = tk.Label(ventana, text="Contraseña:", font=("Helvetica", 30))
         titulo2.pack(fill=tk.X, padx=20, pady=5)
-        self.contraseña = tk.Entry(ventana, show="*")
-        self.contraseña.pack(fill=tk.X, padx=20, pady=10)
+        self.contraseña = tk.Entry(ventana, show="*", font=("Helvetica", 30))
+        self.contraseña.pack(fill=tk.X, padx=20, pady=10, )
 
         self.botonLog= tk.Button(ventana, text="Boton Azul", fg="red", bg="#00ccff", font=("Helvetica", 15), command=self.verificar)
         self.botonLog.pack()
@@ -30,6 +30,8 @@ class Interfaz:
             mensaje = "Bienvenido, " + Usuario + "!"
         else:
             mensaje = "Revise sus datos e intente de nuevo."
+            if login.login() == None:
+                mensaje = "un dato esta vacio"
 
         # Mostrar un mensaje de bienvenida o error
         messagebox.showinfo("Resultado", mensaje)

@@ -1,5 +1,5 @@
 import tkinter as tk
-from Logica12 import Login
+from pruebaLogica import Login
 from tkinter import messagebox
 
 class InterfazLogin:
@@ -20,17 +20,22 @@ class InterfazLogin:
         self.boton_ingresar.grid(row=2, column=1)
 
     def verificar_ingreso(self):
+        # Obtener los valores de entrada
         correo = self.entry_correo.get()
         contraseña = self.entry_contraseña.get()
+
+        # Crear una instancia de la clase Login
         login = Login(correo, contraseña)
-        if login.login():
+
+        # Verificar si el usuario tiene acceso permitido
+        if login.verificar_usuario():
             mensaje = "Bienvenido, " + correo + "!"
         else:
             mensaje = "Revise sus datos e intente de nuevo."
 
         # Mostrar un mensaje de bienvenida o error
         messagebox.showinfo("Resultado", mensaje)
-        
+
 # Crear una ventana de Tkinter
 ventana = tk.Tk()
 

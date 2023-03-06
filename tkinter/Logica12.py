@@ -8,3 +8,5 @@ class Login:
             return True
         else:
             return False
+            if self.usuario == None:
+                return False

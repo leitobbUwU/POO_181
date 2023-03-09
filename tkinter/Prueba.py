@@ -1,46 +1,20 @@
 import tkinter as tk
-from pruebaLogica import Login
 from tkinter import messagebox
 
-class InterfazLogin:
-    def __init__(self, ventana):
-        self.ventana = ventana
-        self.ventana.title("Login")
 
-        # Crear widgets de la interfaz gráfica
-        tk.Label(ventana, text="Correo").grid(row=0, column=0)
-        self.entry_correo = tk.Entry(ventana)
-        self.entry_correo.grid(row=0, column=1)
-
-        tk.Label(ventana, text="Contraseña").grid(row=1, column=0)
-        self.entry_contraseña = tk.Entry(ventana, show="*")
-        self.entry_contraseña.grid(row=1, column=1)
-
-        self.boton_ingresar = tk.Button(ventana, text="Ingresar", command=self.verificar_ingreso)
-        self.boton_ingresar.grid(row=2, column=1)
-
-    def verificar_ingreso(self):
-        # Obtener los valores de entrada
-        correo = self.entry_correo.get()
-        contraseña = self.entry_contraseña.get()
-
-        # Crear una instancia de la clase Login
-        login = Login(correo, contraseña)
-
-        # Verificar si el usuario tiene acceso permitido
-        if login.verificar_usuario():
-            mensaje = "Bienvenido, " + correo + "!"
-        else:
-            mensaje = "Revise sus datos e intente de nuevo."
-
-        # Mostrar un mensaje de bienvenida o error
-        messagebox.showinfo("Resultado", mensaje)
-
-# Crear una ventana de Tkinter
-ventana = tk.Tk()
-
-# Crear una instancia de la clase InterfazLogin
-interfaz_login = InterfazLogin(ventana)
-
-# Iniciar el ciclo principal de la ventana
+class Window:
+    def _init_(self, cosa):
+        self.window=cosa
+        self.window.title("Practica 11.3 Frames")
+        self.window.geometry("800x600")
+            
+        self.longitud = tk.Entry(ventana, font=("Helvetica", 30), bg='#A9F5BC')
+        self.longitud.pack(padx=20,pady=10)
+        
+        self.Generar= tk.Button(cosa, text="Boton Azul", fg="red", bg="#00ccff", font=("Helvetica", 15))
+        self.Generar.pack()
+        
+        
+ventana= tk.Tk()
+Mostrar=Window(ventana)
 ventana.mainloop()

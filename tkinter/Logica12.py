@@ -1,6 +1,6 @@
 class Login:
-    def __init__(self, usuario, contraseña):
-            self.usuario = usuario
+    def __init__(self, user, contraseña):
+            self.usuario = user
             self.contraseña = contraseña
 
     def login(self):
@@ -8,5 +8,3 @@ class Login:
             return True
         else:
             return False
-            if self.usuario == None:
-                return False

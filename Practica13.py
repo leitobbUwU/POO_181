@@ -12,19 +12,18 @@ class Window:
         self.longitud = tk.Entry(ventana, font=("Helvetica", 30), bg='#6FE74B')
         self.longitud.pack(padx=20,pady=10)
         
-        self.Generar= tk.Button(cosa, text="Boton Azul", fg="#000000", bg="#FFFFFF", font=("Roman", 15))
+        self.Generar= tk.Button(cosa, text="Boton Azul", fg="#000000", bg="#FFFFFF", font=("Roman", 15), command= self.Longitud)
         self.Generar.pack()
         
     def Longitud(self):
         Tamaño = self.longitud.get()
-        Gen= password(Tamaño)
+        Gen= password(self, Tamaño)
         # Verificar que la longitud es un entero positivo
-        if Gen.password():
-            contrasena = (int(self.longitud))
+        if Gen.crafteo():
+            correcto = password.crafteo
+            #messagebox.showinfo("Contraseña: "{correcto.get()})
         else:
-            contrasena = generar_contrasena()
-
-        print("La contraseña generada es:", contrasena)
+            contrasena = password.crafteo
         
 ventana= tk.Tk()
 Mostrar=Window(ventana)

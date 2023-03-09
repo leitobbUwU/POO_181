@@ -1,14 +1,27 @@
-class Login:
-    def __init__(self, usuario, contraseña):
-        self.usuario = usuario
-        self.contraseña = contraseña
+import random
+import string
 
-    def verificar_usuario(self):
-        # Aquí se puede colocar la lógica para verificar si el usuario y la contraseña son válidos
-        # Por ejemplo, si el usuario está en una base de datos y la contraseña coincide con la almacenada
-        
-        # En este caso, simplemente se comprueba si el usuario es "ejemplo" y la contraseña es "password"
-        if self.usuario == "ejemplo" and self.contraseña == "password":
-            return True
-        else:
-            return False
+def generate_password(length, include_uppercase, include_special_chars):
+    chars = string.ascii_lowercase
+    if include_uppercase:
+        chars += string.ascii_uppercase
+    if include_special_chars:
+        chars += string.punctuation
+    password = ''.join(random.choice(chars) for _ in range(length))
+    return password
+
+def check_password_strength(password):
+    length_ok = len(password) >= 8
+    uppercase_ok = any(c.isupper() for c in password)
+    special_chars_ok = any(c in string.punctuation for c in password)
+    if length_ok and uppercase_ok and special_chars_ok:
+        return 'Strong'
+    elif length_ok and uppercase_ok:
+        return 'Moderate'
+    else:
+        return 'Weak'
+
+def generate_password_and_check_strength(length, include_uppercase, include_special_chars):
+    password = generate_password(length, include_uppercase, include_special_chars)
+    strength = check_password_strength(password)
+    return password, strength

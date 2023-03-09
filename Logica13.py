@@ -6,7 +6,7 @@ class password:
         self.tamaño=tamaño
         self.password=contra
     
-    def crafteo(self, longitud=8):
+    def crafteo(self):
         self.tamaño = string.ascii_letters + string.digits + string.punctuation
-        self.password = ''.join(random.choice(self.tamaño) for i in range(longitud))
+        self.password = ''.join(random.choice(self.tamaño) for i in range(8))
         return password

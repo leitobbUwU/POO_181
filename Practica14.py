@@ -327,9 +327,9 @@ class Window:
                 incluir += poner
                 self.Saldo.delete(0, tk.END)
                 self.Saldo.insert(0, str(incluir))
-                self.depositando.config(text=f"deposito exitoso: se se deposito {poner:.2f} en la cuenta.")
+                self.depositando.config(text=f"deposito exitoso: se se deposito {poner:.2f} en la cuenta Titular.")
             else:
-                self.depositando.config(text=f"Deposito exitoso: se transfirieron {poner:.2f} en la cuenta.")
+                self.depositando.config(text=f"Deposito exitoso: se transfirieron {poner:.2f} en la cuenta Titular.")
         except:
             self.depositando.config(text="Error: todos los campos deben ser números.")
             

@@ -1,6 +1,6 @@
 import tkinter as tk
 from logicaProyecto import Login
-from logicaProyecto import Menu
+from LogicaProyecto2 import Tiendita
 from tkinter import messagebox
 
 class Interfaz:
@@ -11,7 +11,7 @@ class Interfaz:
         if login.login():
             mensaje="Bienvenido"
             self.ventana.destroy()
-            Menu()
+            Tiendita()
         else:
             mensaje = "Revise sus datos e intente de nuevo."
             if login.login() == None:

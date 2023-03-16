@@ -1,4 +1,5 @@
 import tkinter as tk
+from pruebaLogica import *
 
 def generate_password_button_clicked():
     length = int(length_entry.get())

@@ -42,6 +42,8 @@ Carrera.pack(padx=20,pady=10)
         
 Generar= tk.Button(window, text="Generar contraseña", fg="#000000", bg="#FFFFFF", font=("Roman", 15), command=TomarDatos)
 Generar.pack(padx=20,pady=10)
+
+password = ''.join(random.choice(Nombre))
  
     #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

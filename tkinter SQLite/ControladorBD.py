@@ -54,3 +54,28 @@ class ControladorBD:
         
         # Envia la contraseña
         return conHa
+    
+    #Metodo para consulta de usuario
+    def consultarUsuario(self,id):
+        #1. Preparar una condición
+        conx= self.conexionBD()
+        
+        #2. Verificar si id contiene algo
+        if(id==""):
+            messagebox.showerror("Error", "ID vacio, escribe un usuario valido.")
+            conx.close()
+        else:
+            try:
+                #3. Preparar el cursor y el qwery
+                cursor=conx.cursor()
+                selectQry= "select * from TBRegistrados where id="+id
+                
+                #4. ejecutar y guardar la consulta
+                cursor.execute(selectQry)
+                rsUsuario=cursor.fetchall()
+                conx.close()
+                
+                return rsUsuario
+                
+            except sqlite3.OperationalError:
+                print("Error consulta")

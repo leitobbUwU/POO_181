@@ -1,7 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 import tkinter as tk
-from ControladorBD import * #1. Mandamos a llamar los metodos dentro de la clase ControladorBD
+from ControladorBD import * 
+#1. Mandamos a llamar los metodos dentro de la clase ControladorBD
 
 #2. Creamos 1 objeto de la Clase ControladorBD
 # ademas nos ayudara a iniciar los metodos de la clase
@@ -21,6 +22,9 @@ def ejecutaSelectU():
         textEnc.insert(tk.END, cadena)
     else:
         messagebox.showinfo("No encontrado", "Ese usuario no existe en la BD")
+        
+def consultoria():
+    return controlador.consultando()
     
 
 ventana=Tk()
@@ -64,6 +68,22 @@ botonBus= tk.Button(pestana2, text="Buscar", fg="Black", bg="#00ccff", font=("Mo
 iblid = Label(pestana2, text="Encontrado ",fg='blue', font=("Modern",18)).pack(fill=tk.X, padx=20,pady=5)
 textEnc=tk.Text(pestana2, height = 5, width=52)
 textEnc.pack()
+
+#Inicio de la tercer pestaña
+columns = ('Usuario', 'Correo', 'Contraseña')
+tree = ttk.Treeview(pestana3, columns=columns, show='headings')
+
+tree.heading('Usuario', text='UsuarioDB')
+tree.heading('Correo', text='CorreoDB')
+tree.heading('Contraseña', text='ContraseñaDB')
+
+tree.pack(padx=20, pady=10,)
+
+# Obtención de los datos de la función consultoria() y agregación a Treeview
+datos=consultoria()
+for i, row in enumerate(datos):
+    # Insertar datos de cada fila en el Treeview
+    tree.insert('', 'end', text=str(i+1), values=row)
 
 panel.add(pestana1, text='Formulario usuarios')
 panel.add(pestana2, text='Buscar usuarios')

@@ -79,3 +79,24 @@ class ControladorBD:
                 
             except sqlite3.OperationalError:
                 print("Error consulta")
+                
+    def consultando(self):
+        #1. Preparar una condición
+        conx= self.conexionBD()
+        #3. Preparar el cursor y el qwery
+        cursor=conx.cursor()
+        selectQry= "select nombre, correo, contra from TBRegistrados"
+                
+        #4. ejecutar y guardar la consulta
+        cursor.execute(selectQry)
+        rsUsuario=cursor.fetchall()
+        conx.close()
+        
+        #tomamos los datos guardados en la consulta y los agregamos 
+        # como una lista en datos
+        datos = []
+        for row in rsUsuario:
+            datos.append(list(row))
+
+        #Regresamos la lista
+        return datos

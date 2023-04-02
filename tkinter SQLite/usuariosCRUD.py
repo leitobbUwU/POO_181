@@ -1,3 +1,4 @@
+import threading
 from tkinter import *
 from tkinter import ttk
 import tkinter as tk
@@ -25,6 +26,22 @@ def ejecutaSelectU():
         
 def consultoria():
     return controlador.consultando()
+
+def actualizar():
+    # Borrar los registros actuales en la tabla
+    for record in tree.get_children():
+        tree.delete(record)
+
+    # Obtener los nuevos registros de la base de datos
+    datos = consultoria()
+
+    # Agregar los nuevos registros a la tabla
+    for i, row in enumerate(datos):
+        tree.insert('', 'end', text=str(i+1), values=row)
+        
+def actualizar_tabla():
+    t = threading.Thread(target=actualizar)
+    t.start()
     
 
 ventana=Tk()
@@ -84,6 +101,8 @@ datos=consultoria()
 for i, row in enumerate(datos):
     # Insertar datos de cada fila en el Treeview
     tree.insert('', 'end', text=str(i+1), values=row)
+
+botonAct= tk.Button(pestana3, text="Actualizar", fg="Black", bg="#00ccff", font=("Modern", 15), command=actualizar_tabla).pack()
 
 panel.add(pestana1, text='Formulario usuarios')
 panel.add(pestana2, text='Buscar usuarios')

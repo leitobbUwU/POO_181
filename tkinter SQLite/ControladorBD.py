@@ -28,7 +28,7 @@ class ControladorBD:
             messagebox.showwarning("Aguas", "Formulario incompleto")
         else:
             #3. Preparamos Cursor, Datos, QuerySQL
-            cursor = conx.cursor()
+            cursor = conx.cursor() # type: ignore
             # Se manda a encriptar la contraseña y se agrega en el paquete de datos enviados a la BD
             conH= self.encriptarCon(con)
             datos=(nom, cor, conH)
@@ -36,8 +36,8 @@ class ControladorBD:
             
             #4. Ejecutar Insert y cerramos conexion
             cursor.execute(qrInsert, datos)
-            conx.commit()
-            conx.close()
+            conx.commit() # type: ignore
+            conx.close() # type: ignore
             messagebox.showinfo("Exito", "Usuario Guardado")
             
     # Metodo para encriptar la contraseña
@@ -63,17 +63,17 @@ class ControladorBD:
         #2. Verificar si id contiene algo
         if(id==""):
             messagebox.showerror("Error", "ID vacio, escribe un usuario valido.")
-            conx.close()
+            conx.close() # type: ignore
         else:
             try:
                 #3. Preparar el cursor y el qwery
-                cursor=conx.cursor()
+                cursor=conx.cursor() # type: ignore
                 selectQry= "select * from TBRegistrados where id="+id
                 
                 #4. ejecutar y guardar la consulta
                 cursor.execute(selectQry)
                 rsUsuario=cursor.fetchall()
-                conx.close()
+                conx.close() # type: ignore
                 
                 return rsUsuario
                 
@@ -84,19 +84,76 @@ class ControladorBD:
         #1. Preparar una condición
         conx= self.conexionBD()
         #3. Preparar el cursor y el qwery
-        cursor=conx.cursor()
-        selectQry= "select nombre, correo, contra from TBRegistrados"
-                
-        #4. ejecutar y guardar la consulta
-        cursor.execute(selectQry)
-        rsUsuario=cursor.fetchall()
-        conx.close()
-        
-        #tomamos los datos guardados en la consulta y los agregamos 
-        # como una lista en datos
-        datos = []
-        for row in rsUsuario:
-            datos.append(list(row))
+        cursor=conx.cursor() # type: ignore
+        try:
+            selectQry= "select id, nombre, correo, contra from TBRegistrados"
+                    
+            #4. ejecutar y guardar la consulta
+            cursor.execute(selectQry)
+            rsUsuario=cursor.fetchall()
+            conx.close() # type: ignore
+            
+            #tomamos los datos guardados en la consulta y los agregamos 
+            # como una lista en datos
+            datos = []
+            for row in rsUsuario:
+                datos.append(list(row))
 
-        #Regresamos la lista
-        return datos
+            #Regresamos la lista
+            return datos
+        except sqlite3.OperationalError:
+            print("Error de consulta a la BD")
+    
+    # Metodo para actualizar un usuario por su ID
+    def actualizarUsuario(self, idRe, nomRe, corRe, conRe):
+        # 1. usamos una conexión para actualizar
+        conx = self.conexionBD()
+
+        # 2. Checar que el id exista y el entry contenga algo
+        if not idRe:
+            messagebox.showwarning("Aguas", "ID vacío")
+            return
+        if not nomRe or not corRe or not conRe:
+            messagebox.showwarning("Aguas", "Formulario incompleto")
+            return
+        usuario = self.consultarUsuario(idRe)
+        if not usuario:
+            messagebox.showwarning("Aguas", "ID no existe en la BD")
+            return
+
+        # 3. Preparamos Cursor, Datos, QuerySQL
+        cursor = conx.cursor() # type: ignore
+        # Se manda a encriptar la contraseña y se agrega en el paquete de datos enviados a la BD
+        conH = self.encriptarCon(conRe)
+        datos = (nomRe, corRe, conH, idRe)
+        qrUpdate = "update TBRegistrados set nombre=?, correo=?, contra=? where id=?"
+
+        # 4. Ejecutar Update y cerramos conexion
+        cursor.execute(qrUpdate, datos)
+        conx.commit() # type: ignore
+        conx.close() # type: ignore
+        messagebox.showinfo("Exito", "Usuario Actualizado")
+        
+    def eliminarUsuario(self, idRe):
+        # 1. usamos una conexión para eliminar
+        conx = self.conexionBD()
+
+        # 2. Checar que el id exista
+        if not idRe:
+            messagebox.showwarning("Aguas", "ID vacío")
+            return
+        usuario = self.consultarUsuario(idRe)
+        if not usuario:
+            messagebox.showwarning("Aguas", "ID no existe en la BD")
+            return
+
+        # 3. Preparamos Cursor, Datos, QuerySQL
+        cursor = conx.cursor() # type: ignore
+        datos = (idRe,)
+        qrDelete = "delete from TBRegistrados where id=?"
+
+        # 4. Ejecutar Delete y cerramos conexion
+        cursor.execute(qrDelete, datos)
+        conx.commit() # type: ignore
+        conx.close() # type: ignore
+        messagebox.showinfo("Exito", "Usuario Eliminado")

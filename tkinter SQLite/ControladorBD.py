@@ -147,12 +147,17 @@ class ControladorBD:
             messagebox.showwarning("Aguas", "ID no existe en la BD")
             return
 
-        # 3. Preparamos Cursor, Datos, QuerySQL
+        # 3. Ventana emergente de confirmación
+        respuesta = messagebox.askquestion("Confirmación", "¿Estás seguro que deseas eliminar al usuario con ID "+idRe+"?")
+        if respuesta == 'no':
+            return
+
+        # 4. Preparamos Cursor, Datos, QuerySQL
         cursor = conx.cursor() # type: ignore
         datos = (idRe,)
         qrDelete = "delete from TBRegistrados where id=?"
 
-        # 4. Ejecutar Delete y cerramos conexion
+        # 5. Ejecutar Delete y cerramos conexion
         cursor.execute(qrDelete, datos)
         conx.commit() # type: ignore
         conx.close() # type: ignore

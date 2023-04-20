@@ -63,6 +63,7 @@ tree.heading('Saldo', text='Saldo')
 tree.pack(padx=20, pady=10)
 
 
+
 panel.add(pestana1, text="Ingrese datos")
 panel.add(pestana2, text="Actualizar y consultar")
 

@@ -12,7 +12,7 @@ class Window:
         self.longitud = tk.Entry(ventana, font=("Helvetica", 30), bg='#6FE74B')
         self.longitud.pack(padx=20,pady=10)
         
-        self.Generar= tk.Button(cosa, text="Boton Azul", fg="#000000", bg="#FFFFFF", font=("Roman", 15), command= self.Longitud)
+        self.Generar= tk.Button(cosa, text="verificar contraseña", fg="#000000", bg="#FFFFFF", font=("Roman", 15), command= self.Longitud)
         self.Generar.pack()
         
     def Longitud(self):
@@ -21,7 +21,7 @@ class Window:
         # Verificar que la longitud es un entero positivo
         if Gen.crafteo():
             correcto = password.crafteo
-            #messagebox.showinfo("Contraseña: "{correcto.get()})
+            messagebox.showinfo(f"Contraseña: {correcto}")
         else:
             contrasena = password.crafteo
         
